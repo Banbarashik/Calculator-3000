@@ -27,10 +27,32 @@ function operate(op, a, b) {
 }
 
 const displayPanel = document.querySelector("#display");
-const buttons = document.querySelectorAll("button");
-buttons.forEach((button) => {
+const numberButtons = document.querySelectorAll(".number");
+let displayValue = [];
+numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    displayPanel.textContent = button.value;
+    displayValue.push(button.value);
+    displayPanel.innerHTML = displayValue.join("");
   });
 });
-function displayValue() {}
+
+const operatorButtons = document.querySelectorAll(".operator");
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", fillExpression);
+});
+
+let valueA;
+let valueB;
+function fillExpression(event, a, b) {
+  if (!valueA) {
+    valueA = displayValue.join("");
+    displayValue = [];
+  } else if (!valueB) {
+    valueB = displayValue.join("");
+    displayValue = [];
+  } else if (valueA && valueB) {
+    if ((event.target.value = "+")) {
+      add(valueA, valueB);
+    }
+  }
+}
