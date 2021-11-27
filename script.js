@@ -32,7 +32,7 @@ let displayValue = [];
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     displayValue.push(button.value);
-    displayPanel.innerHTML = displayValue.join("");
+    displayPanel.textContent = displayValue.join("");
   });
 });
 
@@ -43,16 +43,33 @@ operatorButtons.forEach((button) => {
 
 let valueA;
 let valueB;
-function fillExpression(event, a, b) {
-  if (!valueA) {
-    valueA = displayValue.join("");
-    displayValue = [];
-  } else if (!valueB) {
-    valueB = displayValue.join("");
-    displayValue = [];
-  } else if (valueA && valueB) {
-    if ((event.target.value = "+")) {
-      add(valueA, valueB);
-    }
+let currentOperator;
+let result;
+function fillExpression(event) {
+  if (result) {
+    valueA = result;
+    valueB = 0;
+    currentOperator = event.target.value;
   }
+  if (!valueA) {
+    valueA = Number(displayValue.join(""));
+    displayValue = [];
+    currentOperator = event.target.value;
+  } else if (!valueB) {
+    valueB = Number(displayValue.join(""));
+    displayValue = [];
+  }
+
+  //   if (valueA && valueB && event.target.value === "=") {
+  //     result = operate(currentOperator, valueA, valueB);
+  //     displayPanel.textContent = result;
+  // valueA = result;
+  // valueB = '';
+  // }
+  const equal = document.querySelector('button[value="="]');
+  equal.addEventListener("click", () => {
+    valueB = Number(displayValue.join(""));
+    result = operate(currentOperator, valueA, valueB);
+    displayPanel.textContent = result;
+  });
 }
