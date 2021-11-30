@@ -1,6 +1,7 @@
 const allButtons = document.querySelectorAll("button");
 const display = document.querySelector("#display");
 const buttons = document.querySelectorAll(".number");
+const point = document.querySelector("#point");
 const operators = document.querySelectorAll(".operator");
 const equal = document.querySelector("#equal");
 const clear = document.querySelector("#clear");
@@ -40,12 +41,18 @@ function operate(op, a, b) {
 
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    if (displayPrevValue && result) {
-      displayPrevValue = "";
-      display.textContent = displayPrevValue;
-      indicator = false;
+    if (display.textContent.length < 20) {
+      if (displayPrevValue && result) {
+        displayPrevValue = "";
+        display.textContent = displayPrevValue;
+        indicator = false;
+      }
+      display.textContent += e.target.value;
+
+      if (e.target.value === ".") {
+        point.setAttribute("disabled", "");
+      }
     }
-    display.textContent += e.target.value;
   });
 });
 
@@ -54,7 +61,7 @@ operators.forEach((operator) => {
     if (currentOperator === e.target.value && !indicator && result) {
       result = operate(currentOperator, +prevValue, +display.textContent);
       indicator = true;
-      display.textContent = result;
+      display.textContent = parseFloat(result.toFixed(10));
       displayPrevValue = true;
       currentOperator = "";
     } else {
@@ -62,9 +69,14 @@ operators.forEach((operator) => {
       prevValue = display.textContent;
       displayPrevValue = prevValue;
       display.textContent = displayPrevValue;
-
-      e.target.classList.add("current-operator");
     }
+
+    if (document.querySelector(".current-operator")) {
+      document
+        .querySelector(".current-operator")
+        .classList.remove("current-operator");
+    }
+    e.target.classList.add("current-operator");
   });
 });
 
@@ -100,13 +112,12 @@ clear.addEventListener("click", () => {
 
 const highlightSound = document.querySelector("#highlight");
 const selectSound = document.querySelector("#select");
+function playSound(sound) {
+  sound.currentTime = 0;
+  sound.play();
+}
 allButtons.forEach((button) => {
-  button.addEventListener("mouseover", (e) => {
-    highlightSound.currentTime = 0;
-    highlightSound.play();
-  });
-  button.addEventListener("click", (e) => {
-    selectSound.currentTime = 0;
-    selectSound.play();
-  });
+  button.addEventListener("mouseover", () => playSound(highlightSound));
+  button.addEventListener("focus", () => playSound(highlightSound));
+  button.addEventListener("click", () => playSound(selectSound));
 });
