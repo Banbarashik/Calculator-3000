@@ -1,0 +1,175 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
+@font-face {
+  font-family: "Monofonto";
+  src: url("monofonto.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Overseer";
+  src: url("Overseer.otf") format("opentype");
+}
+
+:root {
+  --main-color: rgb(3, 27, 14);
+  --font-color: rgb(32, 192, 104);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 2rem;
+  font-family: "Monofonto", sans-serif;
+  background-color: rgb(61, 85, 65);
+  color: var(--font-color);
+  font-weight: 700;
+}
+
+button {
+  font: inherit;
+  background: initial;
+  border: 2px solid var(--font-color);
+  color: inherit;
+}
+
+h1 {
+  position: absolute;
+  top: -23%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-family: "Overseer";
+  font-size: 7.2rem;
+}
+
+.calculator-area {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 5rem;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80rem;
+  height: 55rem;
+  border-radius: 40px;
+  padding: 4rem;
+  background-color: var(--main-color);
+  background-image: url(MathWrathGreen.png);
+  background-repeat: no-repeat;
+  background-position: 43rem;
+  background-size: 26rem;
+}
+
+.calculator-box {
+  display: grid;
+  grid-template-columns: repeat(3, 7rem);
+  grid-template-rows: repeat(4, 7rem) 5rem;
+  gap: 1.5rem;
+  padding-left: 1rem;
+}
+
+#clear {
+  grid-column: 1 / -1;
+}
+
+.calculator-operators {
+  grid-column: 1 / -1;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3rem;
+}
+
+#display {
+  font-family: "VT323", monospace;
+  display: flex;
+  align-items: center;
+  height: 6rem;
+  border-radius: 10px;
+  padding-left: 2rem;
+  background-color: rgb(61, 85, 65);
+  color: var(--font-color);
+  font-size: 3.5rem;
+  font-weight: 400;
+}
+
+#display::before {
+  content: ">";
+  font-size: 3rem;
+  padding-right: 1rem;
+}
+
+#display::after {
+  content: "■";
+  animation: square-blink 1s steps(5, start) infinite;
+  font-size: 3.8rem;
+}
+
+@keyframes square-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.operator {
+  position: relative;
+  /* width: 12rem; */
+  padding: 0 2rem;
+  border: none;
+  font-size: 2.2rem;
+}
+
+.operator::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(100%, -50%);
+  width: 8.3rem;
+  height: 2px;
+  background-color: var(--font-color);
+  pointer-events: none;
+}
+
+.operator:last-child::after {
+  display: none;
+}
+
+.operator:hover,
+.current-operator {
+  box-shadow: inset 0 0 0 2px var(--font-color);
+}
+
+.number {
+  font-size: 2.4rem;
+}
+
+.calculator-box button {
+  position: relative;
+}
+
+.calculator-box button::after {
+  display: none;
+  content: "";
+  top: -6px;
+  left: -6px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--font-color);
+}
+
+.calculator-box button:hover::after {
+  display: initial;
+}

@@ -1,32 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
-    <title>Calculator</title>
+    <title>Calculator-3000</title>
   </head>
   <body>
-    <div id="calculator-body">
+    <div class="calculator-area">
+      <h1>Calculator-3000</h1>
+      <div class="calculator-box">
+        <button value="1" class="number">1</button>
+        <button value="2" class="number">2</button>
+        <button value="3" class="number">3</button>
+        <button value="4" class="number">4</button>
+        <button value="5" class="number">5</button>
+        <button value="6" class="number">6</button>
+        <button value="7" class="number">7</button>
+        <button value="8" class="number">8</button>
+        <button value="9" class="number">9</button>
+        <button value="0" class="number">0</button>
+        <button value="." id="point">.</button>
+        <button value="=" id="equal">=</button>
+        <button value="=" id="clear">Clear</button>
+      </div>
       <div id="display"></div>
-      <button value="0" class="number">0</button>
-      <button value="1" class="number">1</button>
-      <button value="2" class="number">2</button>
-      <button value="3" class="number">3</button>
-      <button value="4" class="number">4</button>
-      <button value="5" class="number">5</button>
-      <button value="6" class="number">6</button>
-      <button value="7" class="number">7</button>
-      <button value="8" class="number">8</button>
-      <button value="9" class="number">9</button>
-      <button value="+" class="operator">+</button>
-      <button value="-" class="operator">-</button>
-      <button value="*" class="operator">*</button>
-      <button value="/" class="operator">/</button>
-      <button value="=">=</button>
-      <button value="clear">Clear</button>
+      <div class="calculator-operators">
+        <button value="+" class="operator">Plus</button>
+        <button value="-" class="operator">Minus</button>
+        <button value="*" class="operator">Multiply</button>
+        <button value="/" class="operator">Divide</button>
+      </div>
     </div>
+
+    <audio id="highlight" src="ui_pipboy_highlight.wav"></audio>
+    <audio id="select" src="ui_pipboy_select.wav"></audio>
   </body>
 </html>

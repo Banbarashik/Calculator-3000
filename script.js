@@ -1,3 +1,15 @@
+const allButtons = document.querySelectorAll("button");
+const display = document.querySelector("#display");
+const buttons = document.querySelectorAll(".number");
+const operators = document.querySelectorAll(".operator");
+const equal = document.querySelector("#equal");
+const clear = document.querySelector("#clear");
+let prevValue;
+let displayPrevValue;
+let currentOperator;
+let result = true; //subject to change
+let indicator = false;
+
 function add(a, b) {
   return a + b;
 }
@@ -26,50 +38,75 @@ function operate(op, a, b) {
   }
 }
 
-const displayPanel = document.querySelector("#display");
-const numberButtons = document.querySelectorAll(".number");
-let displayValue = [];
-numberButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    displayValue.push(button.value);
-    displayPanel.textContent = displayValue.join("");
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    if (displayPrevValue && result) {
+      displayPrevValue = "";
+      display.textContent = displayPrevValue;
+      indicator = false;
+    }
+    display.textContent += e.target.value;
   });
 });
 
-const operatorButtons = document.querySelectorAll(".operator");
-operatorButtons.forEach((button) => {
-  button.addEventListener("click", fillExpression);
+operators.forEach((operator) => {
+  operator.addEventListener("click", (e) => {
+    if (currentOperator === e.target.value && !indicator && result) {
+      result = operate(currentOperator, +prevValue, +display.textContent);
+      indicator = true;
+      display.textContent = result;
+      displayPrevValue = true;
+      currentOperator = "";
+    } else {
+      currentOperator = e.target.value;
+      prevValue = display.textContent;
+      displayPrevValue = prevValue;
+      display.textContent = displayPrevValue;
+
+      e.target.classList.add("current-operator");
+    }
+  });
 });
 
-let valueA;
-let valueB;
-let currentOperator;
-let result;
-function fillExpression(event) {
-  if (result) {
-    valueA = result;
-    valueB = 0;
-    currentOperator = event.target.value;
+equal.addEventListener("click", () => {
+  if (currentOperator === "" || indicator === true) {
+    return;
   }
-  if (!valueA) {
-    valueA = Number(displayValue.join(""));
-    displayValue = [];
-    currentOperator = event.target.value;
-  } else if (!valueB) {
-    valueB = Number(displayValue.join(""));
-    displayValue = [];
-  }
+  if (currentOperator) {
+    result = operate(currentOperator, +prevValue, +display.textContent);
+    display.textContent = parseFloat(result.toFixed(10));
+    prevValue = result;
+    indicator = true;
+    currentOperator = "";
+    displayPrevValue = true;
 
-  //   if (valueA && valueB && event.target.value === "=") {
-  //     result = operate(currentOperator, valueA, valueB);
-  //     displayPanel.textContent = result;
-  // valueA = result;
-  // valueB = '';
-  // }
-  const equal = document.querySelector('button[value="="]');
-  equal.addEventListener("click", () => {
-    valueB = Number(displayValue.join(""));
-    result = operate(currentOperator, valueA, valueB);
-    displayPanel.textContent = result;
+    document
+      .querySelector(".current-operator")
+      .classList.remove("current-operator");
+  }
+});
+
+clear.addEventListener("click", () => {
+  prevValue = "";
+  displayPrevValue = "";
+  display.textContent = "";
+  result = true;
+  indicator = false;
+
+  document
+    .querySelector(".current-operator")
+    .classList.remove("current-operator");
+});
+
+const highlightSound = document.querySelector("#highlight");
+const selectSound = document.querySelector("#select");
+allButtons.forEach((button) => {
+  button.addEventListener("mouseover", (e) => {
+    highlightSound.currentTime = 0;
+    highlightSound.play();
   });
-}
+  button.addEventListener("click", (e) => {
+    selectSound.currentTime = 0;
+    selectSound.play();
+  });
+});
