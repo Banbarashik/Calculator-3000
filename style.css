@@ -44,6 +44,33 @@ button:focus {
   outline: none;
 }
 
+label {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+label::after {
+  content: "\f0c8";
+  font-family: "FontAwesome";
+  padding-left: 1rem;
+}
+
+input[type="checkbox"]:checked + label::after {
+  content: "\f14a";
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 h1 {
   position: absolute;
   top: -23%;
@@ -52,6 +79,28 @@ h1 {
 
   font-family: "Overseer";
   font-size: 7.2rem;
+}
+
+footer {
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  padding: 0.5rem 2rem;
+  background-color: var(--main-color);
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.settings {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 2rem;
+}
+
+.made-by {
+  margin-left: auto;
 }
 
 .calculator-area {
@@ -132,13 +181,13 @@ h1 {
 .operator:first-child::before {
   left: 0;
   transform: translate(-100%, 7%);
-  padding-right: 31px;
+  padding-right: 3rem;
 }
 
 .operator:last-child::before {
   right: 0;
   transform: translate(100%, 7%);
-  padding-left: 31px;
+  padding-left: 3rem;
 }
 
 #display {

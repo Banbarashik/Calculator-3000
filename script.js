@@ -5,7 +5,8 @@ const point = document.querySelector("#point");
 const operators = document.querySelectorAll(".operator");
 const equal = document.querySelector("#equal");
 const clear = document.querySelector("#clear");
-const colorSwitchBtn = document.querySelector("#color-switch-btn");
+const colorSwitchCheckbox = document.querySelector("#color-switch-checkbox");
+const soundSwitchCheckbox = document.querySelector("#sound-switch-checkbox");
 const root = document.documentElement;
 let prevValue;
 let displayPrevValue;
@@ -125,13 +126,32 @@ function playSound(sound) {
   sound.currentTime = 0;
   sound.play();
 }
+highlightSound.muted = true;
+selectSound.muted = true;
+
+soundSwitchCheckbox.addEventListener("click", () => {
+  if (soundSwitchCheckbox.checked === true) {
+    highlightSound.muted = false;
+    selectSound.muted = false;
+  } else {
+    highlightSound.muted = true;
+    selectSound.muted = true;
+  }
+});
+
 allButtons.forEach((button) => {
   button.addEventListener("mouseover", () => playSound(highlightSound));
   button.addEventListener("click", () => playSound(selectSound));
 });
 
-colorSwitchBtn.addEventListener("click", () => {
-  root.style.setProperty("--bg-color", "rgb(74 63 37)");
-  root.style.setProperty("--main-color", "rgb(42, 33, 13)");
-  root.style.setProperty("--font-color", "rgb(219, 174, 62)");
+colorSwitchCheckbox.addEventListener("click", () => {
+  if (colorSwitchCheckbox.checked === true) {
+    root.style.setProperty("--bg-color", "rgb(74 63 37)");
+    root.style.setProperty("--main-color", "rgb(42, 33, 13)");
+    root.style.setProperty("--font-color", "rgb(219, 174, 62)");
+  } else {
+    root.style.setProperty("--bg-color", "rgb(61, 85, 65)");
+    root.style.setProperty("--main-color", "rgb(3, 27, 14)");
+    root.style.setProperty("--font-color", "rgb(32, 192, 104)");
+  }
 });

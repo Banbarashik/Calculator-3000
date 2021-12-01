@@ -1,6 +1,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/a648cdadfa.js" crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
     <title>Calculator-3000</title>
   </head>
@@ -31,7 +32,19 @@
       </div>
       <div class="scanline"></div>
     </div>
-    <button id="color-switch-btn">Fallout: New Vegas</button>
+    <footer>
+      <form action="" autocomplete="off" class="settings">
+          <input type="checkbox" id="sound-switch-checkbox"></input>
+          <label for="sound-switch-checkbox">Sound</label>
+          <input type="checkbox" id="color-switch-checkbox"></input>
+          <label for="color-switch-checkbox">Fallout: New Vegas</label>
+      </form>
+      <span class="made-by">Made by
+        <a href="https://github.com/Banbarashik">
+          Banbarashik <i class="fab fa-github"></i>
+        </a>
+      </span>
+    </footer>
 
     <audio id="highlight" src="ui_pipboy_highlight.wav"></audio>
     <audio id="select" src="ui_pipboy_select.wav"></audio>
