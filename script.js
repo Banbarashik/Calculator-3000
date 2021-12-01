@@ -64,6 +64,7 @@ operators.forEach((operator) => {
       display.textContent = parseFloat(result.toFixed(10));
       displayPrevValue = true;
       currentOperator = "";
+      point.removeAttribute("disabled", "");
     } else {
       currentOperator = e.target.value;
       prevValue = display.textContent;
@@ -91,6 +92,11 @@ equal.addEventListener("click", () => {
     indicator = true;
     currentOperator = "";
     displayPrevValue = true;
+    point.removeAttribute("disabled", "");
+
+    if (result === Infinity) {
+      display.textContent = "The wasteland has claimed your life.";
+    }
 
     document
       .querySelector(".current-operator")
@@ -104,6 +110,7 @@ clear.addEventListener("click", () => {
   display.textContent = "";
   result = true;
   indicator = false;
+  point.removeAttribute("disabled", "");
 
   document
     .querySelector(".current-operator")
@@ -118,6 +125,5 @@ function playSound(sound) {
 }
 allButtons.forEach((button) => {
   button.addEventListener("mouseover", () => playSound(highlightSound));
-  button.addEventListener("focus", () => playSound(highlightSound));
   button.addEventListener("click", () => playSound(selectSound));
 });
