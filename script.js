@@ -5,6 +5,8 @@ const point = document.querySelector("#point");
 const operators = document.querySelectorAll(".operator");
 const equal = document.querySelector("#equal");
 const clear = document.querySelector("#clear");
+const colorSwitchBtn = document.querySelector("#color-switch-btn");
+const root = document.documentElement;
 let prevValue;
 let displayPrevValue;
 let currentOperator;
@@ -126,4 +128,10 @@ function playSound(sound) {
 allButtons.forEach((button) => {
   button.addEventListener("mouseover", () => playSound(highlightSound));
   button.addEventListener("click", () => playSound(selectSound));
+});
+
+colorSwitchBtn.addEventListener("click", () => {
+  root.style.setProperty("--bg-color", "rgb(74 63 37)");
+  root.style.setProperty("--main-color", "rgb(42, 33, 13)");
+  root.style.setProperty("--font-color", "rgb(219, 174, 62)");
 });
