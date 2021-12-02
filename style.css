@@ -32,6 +32,12 @@ body {
   background-color: var(--bg-color);
   color: var(--font-color);
   font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem;
 }
 
 button {
@@ -72,13 +78,9 @@ a {
 }
 
 h1 {
-  position: absolute;
-  top: -23%;
-  left: 50%;
-  transform: translateX(-50%);
-
   font-family: "Overseer";
   font-size: 7.2rem;
+  letter-spacing: 0.03em;
 }
 
 footer {
@@ -103,24 +105,25 @@ footer {
   margin-left: auto;
 }
 
+#vault-boy {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 14%;
+  width: 26rem;
+}
+
 .calculator-area {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr 5rem;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 80rem;
   height: 55rem;
-  border-radius: 40px;
   padding: 4rem;
+  border-radius: 40px;
+  margin-bottom: 6rem;
   background-color: var(--main-color);
-  background-image: url(MathWrathGreen.png);
-  background-repeat: no-repeat;
-  background-position: 43rem;
-  background-size: 26rem;
 }
 
 .calculator-area::before {
@@ -315,5 +318,36 @@ footer {
   100% {
     opacity: 0.03;
     bottom: 0%;
+  }
+}
+
+/* MEDIA QUERIES */
+@media (max-height: 37.5em) {
+  html {
+    font-size: 56.5%;
+  }
+  h1 {
+    font-size: 6.8rem;
+  }
+}
+
+@media (max-width: 52em) {
+  html {
+    font-size: 51.5%;
+  }
+}
+
+@media (max-width: 44em) {
+  html {
+    font-size: 45.5%;
+  }
+  h1 {
+    font-size: 6.8rem;
+  }
+}
+
+@media (max-width: 44em) and (min-height: 45.5em) {
+  body {
+    padding-top: 9rem;
   }
 }
